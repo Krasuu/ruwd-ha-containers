@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ha-containers
+  name: ruwd-ha-containers-deployment
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31569
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: ha-containers
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
